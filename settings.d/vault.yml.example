@@ -1,0 +1,16 @@
+---
+:enabled: true
+:auth_backend: 'chef'
+:vault:
+  :address: "https://vault.example.com"
+  :token: "UUID"
+  :ssl_verify: true
+:add_token_metadata: true
+:token_options:
+  :policies: ['policyname']
+  :ttl: '72h'
+:chef:
+  :endpoint: 'https://chef.example.com'
+  :client: 'user'
+  :key: '/path/to/client.pem'
+  :ssl_verify: true

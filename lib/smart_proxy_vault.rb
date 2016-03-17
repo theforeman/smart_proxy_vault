@@ -1,0 +1,10 @@
+require 'sinatra/base'
+require 'vault'
+require 'base64'
+require 'openssl'
+
+require 'smart_proxy_vault/authentication'
+require 'smart_proxy_vault/vault_backend'
+require 'smart_proxy_vault/vault_api'
+require 'smart_proxy_vault/version'
+require 'smart_proxy_vault/vault'
