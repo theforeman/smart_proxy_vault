@@ -3,10 +3,11 @@ module VaultPlugin
     class API
       attr_reader :connection
 
-      def initialize(child)
+      def initialize(child, ttl)
         vault_settings = ::VaultPlugin::Plugin.settings.vault
         @connection = ::Vault::Client.new(vault_settings)
         @child = child
+        @ttl = ttl
         @token_options = token_options
       end
 
@@ -24,13 +25,15 @@ module VaultPlugin
       end
 
       def token_options
-        metadata.merge ::VaultPlugin::Plugin.settings[:token_options]
+        options = metadata.merge ::VaultPlugin::Plugin.settings[:token_options]
+        options[:ttl] = @ttl unless @ttl.nil?
+        options
       end
     end
 
-    def issue
+    def issue(ttl)
       begin
-        vault = API.new vault_client
+        vault = API.new client, ttl
         vault.issue_token
       rescue StandardError => e
         log_halt 500, 'Failed to generate Vault token ' + e.message

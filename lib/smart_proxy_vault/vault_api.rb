@@ -3,7 +3,7 @@ module VaultPlugin
     include ::Proxy::Log
     include ::VaultPlugin::Authentication
     include ::VaultPlugin::VaultBackend
-    helpers ::Proxy::Helpers
+    helpers ::Proxy::Helpers, ::VaultPlugin::Helpers
 
     ::Sinatra::Base.register Authentication
 
@@ -13,7 +13,8 @@ module VaultPlugin
     end
 
     get '/token/issue' do
-      issue
+      ttl = params[:ttl]
+      issue(ttl) if valid_ttl? ttl
     end
   end
 end
