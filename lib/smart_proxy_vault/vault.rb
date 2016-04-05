@@ -6,7 +6,7 @@ module VaultPlugin
     default_settings auth_backend: 'chef',
                      vault: {},
                      add_token_metadata: false,
-                     token: {},
+                     token_options: {},
                      chef: {}
 
     https_rackup_path File.expand_path('https_config.ru', File.expand_path('../', __FILE__))
