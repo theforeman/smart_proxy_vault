@@ -12,7 +12,7 @@ If you're unable to use one of the above to authenticate your clients, you can a
 
 ## Installation
 
-Add this line to your smart proxy bundler.d/chef.rb gemfile:
+Add this line to your Smart Proxy bundler.d/vault.rb gemfile:
 
 ```ruby
 gem 'smart_proxy_vault'
@@ -21,7 +21,7 @@ gem 'smart_proxy_vault'
 And then execute:
 
 ```bash
-  bundle install
+bundle install
 ```
 
 ## Settings
@@ -120,7 +120,17 @@ To configure this plugin you can use template from [settings.d/vault.yml.example
 
 ### Endpoints
 
-`/vault/token/issue`
+#### `/vault/token/issue`
+
+##### Parameters
+
+`ttl=X[d,h,m,s]`
+
+Overrides the token TTL specified in the [`:token_options:`](#token_options) section. This value must be **lower** than the default TTL.
+
+Example:
+
+`/vault/token/issue?ttl=60s`
 
 ### Caveats
 
