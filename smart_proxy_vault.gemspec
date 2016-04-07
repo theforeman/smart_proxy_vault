@@ -15,10 +15,13 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency('bundler', '~> 1.11')
   s.add_development_dependency('rake', '~> 10')
-  # s.add_development_dependency('test-unit', '~> 2')
-  # s.add_development_dependency('mocha', '~> 1')
-  # s.add_development_dependency('webmock', '~> 1')
-  # s.add_development_dependency('rack-test', '~> 0')
+  s.add_development_dependency('pry', '~> 0.10')
+  s.add_development_dependency('test-unit', '~> 2')
+  s.add_development_dependency('mocha', '~> 1')
+  s.add_development_dependency('webmock', '~> 1')
+  s.add_development_dependency('rack-test', '~> 0')
+  s.add_development_dependency('factory_girl', '~> 4.0')
+  s.add_development_dependency('rr', '~> 1.1')
 
   s.add_runtime_dependency('chef-api', '~> 0.5.0')
   s.add_runtime_dependency('vault', '~> 0.3.0')
