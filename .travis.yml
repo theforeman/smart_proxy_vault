@@ -1,0 +1,20 @@
+---
+language: ruby
+cache: bundler
+sudo: false
+script: bundle exec rake test
+before_install:
+  - gem update bundler
+  - gem update --system
+rvm:
+  - 2.1
+  - 2.2
+branches:
+  only:
+    - master
+    - travis-ci
+matrix:
+  fast_finish: true
+addons:
+    code_climate:
+        repo_token: fcadc9418b773b9905383be20e8b4147a0bf5d542224501d9cb0885c5e7855e9
