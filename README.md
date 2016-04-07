@@ -1,3 +1,10 @@
+[![Build Status](https://img.shields.io/travis/visioncritical/smart_proxy_vault/master.svg)](https://travis-ci.org/visioncritical/smart_proxy_vault)
+[![Code Quality](https://img.shields.io/codeclimate/github/visioncritical/smart_proxy_vault.svg)](https://codeclimate.com/github/visioncritical/smart_proxy_vault)
+[![Code Climate](https://img.shields.io/codeclimate/coverage/github/visioncritical/smart_proxy_vault.svg)](https://codeclimate.com/github/visioncritical/smart_proxy_vault/coverage)
+[![Gem](https://img.shields.io/gem/v/smart_proxy_vault.svg)](https://rubygems.org/gems/smart_proxy_vault/versions)
+[![GitHub license](https://img.shields.io/badge/license-GPLv3-blue.svg)](./LICENSE.md)
+
+
 # Smart Proxy - Vault Plugin
 
 A Smart Proxy plugin will return a Vault token after authenticating a client.
