@@ -1,3 +1,6 @@
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 $: << File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'openssl'
@@ -16,3 +19,5 @@ end
 
 logdir = File.join(File.dirname(__FILE__), '..', 'logs')
 FileUtils.mkdir_p(logdir) unless File.exists?(logdir)
+
+WebMock.disable_net_connect!(:allow => "codeclimate.com")
