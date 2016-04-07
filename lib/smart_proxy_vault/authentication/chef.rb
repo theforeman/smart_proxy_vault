@@ -21,8 +21,8 @@ module VaultPlugin
           log_halt 401, "Failed to authenticate Chef client - #{vault_client}. Missing headers."
         end
 
-        unless authenticate signature
-          log_halt 401, "Failed to authenticate Chef client - #{vault_client}"
+        unless authenticate
+          log_halt 401, "Failed to authenticate Chef client - #{vault_client}. Verification failed."
         end
         logger.info("Successfully authenticated Chef client - #{vault_client}")
       end
@@ -30,11 +30,11 @@ module VaultPlugin
       def chefapi
         chefapi_settings = ::VaultPlugin::Plugin.settings.chef
         connection = ::ChefAPI::Connection.new(chefapi_settings)
-        connection.ssl_verify = ssl_verify
+        connection.ssl_verify = chefapi_settings[:ssl_verify] || false
         connection
       end
 
-      def authenticate(signature)
+      def authenticate
         begin
           node = chefapi.clients.fetch vault_client
         rescue StandardError => e
