@@ -2,7 +2,7 @@
 [![Code Quality](https://img.shields.io/codeclimate/github/visioncritical/smart_proxy_vault.svg)](https://codeclimate.com/github/visioncritical/smart_proxy_vault)
 [![Code Climate](https://img.shields.io/codeclimate/coverage/github/visioncritical/smart_proxy_vault.svg)](https://codeclimate.com/github/visioncritical/smart_proxy_vault/coverage)
 [![Gem](https://img.shields.io/gem/v/smart_proxy_vault.svg)](https://rubygems.org/gems/smart_proxy_vault/versions)
-[![GitHub license](https://img.shields.io/badge/license-GPLv3-blue.svg)](./LICENSE.md)
+[![GitHub license](https://img.shields.io/badge/license-GPLv3-blue.svg)](./LICENSE)
 
 
 # Smart Proxy - Vault Plugin
