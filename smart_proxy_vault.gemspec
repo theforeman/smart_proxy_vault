@@ -9,7 +9,8 @@ Gem::Specification.new do |s|
   s.authors = %w{Riley Shott}
   s.email = 'riley.shott@visioncritical.com'
   s.extra_rdoc_files = ['README.md', 'LICENSE']
-  s.files = Dir['{lib,settings.d,bundler.d}/**/*'] + s.extra_rdoc_files
+  s.files = Dir['{lib,settings.d,bundler.d,test}/**/*'] + s.extra_rdoc_files
+  s.test_files = s.files.grep(%r{^(test)/})
   s.homepage = 'http://github.com/visioncritical/smart_proxy_vault'
   s.license = 'GPLv3'
 
