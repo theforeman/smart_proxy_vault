@@ -1,7 +1,19 @@
 module VaultPlugin
   module Helpers
+    def vault_settings
+      ::VaultPlugin::Plugin.settings.vault
+    end
+
     def settings_ttl
       ::VaultPlugin::Plugin.settings.token_options[:ttl]
+    end
+
+    def token_options
+      ::VaultPlugin::Plugin.settings.token_options
+    end
+
+    def add_token_metadata?
+      ::VaultPlugin::Plugin.settings.add_token_metadata
     end
 
     def to_seconds(string)
