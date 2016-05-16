@@ -1,8 +1,12 @@
+require_relative './authentication'
+require_relative './api'
+require_relative './helpers'
+
 module VaultPlugin
-  class VaultAPI < ::Sinatra::Base
+  class Endpoint < ::Sinatra::Base
     include ::Proxy::Log
     include ::VaultPlugin::Authentication
-    include ::VaultPlugin::VaultBackend
+    include ::VaultPlugin::API
     helpers ::Proxy::Helpers, ::VaultPlugin::Helpers
 
     ::Sinatra::Base.register Authentication
@@ -11,6 +15,8 @@ module VaultPlugin
       content_type :json
       authorized?
     end
+
+    start_renewal
 
     get '/token/issue' do
       ttl = params[:ttl]

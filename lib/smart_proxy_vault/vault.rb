@@ -1,3 +1,5 @@
+require_relative './version'
+
 module VaultPlugin
   class Plugin < ::Proxy::Plugin
     plugin 'vault', VaultPlugin::VERSION

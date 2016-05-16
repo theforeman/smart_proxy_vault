@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'smart_proxy_vault'
+require 'smart_proxy_vault/endpoint'
 
 class RequestTest < Test::Unit::TestCase
   include Rack::Test::Methods
@@ -9,13 +10,13 @@ class RequestTest < Test::Unit::TestCase
   ###
 
   def stub_authorized?(bool)
-    any_instance_of(VaultPlugin::VaultAPI) do |klass|
+    any_instance_of(VaultPlugin::Endpoint) do |klass|
       stub(klass).authorized? { true }
     end
   end
 
   def stub_client
-    any_instance_of(VaultPlugin::VaultAPI) do |klass|
+    any_instance_of(VaultPlugin::Endpoint) do |klass|
       stub(klass).client { 'fry' }
     end
   end
@@ -33,7 +34,7 @@ class RequestTest < Test::Unit::TestCase
     stub_request(:post, "https://vault.example.com/v1/auth/token/create").
     with(:body => "{\"ttl\":\"12h\"}",
          :headers => { 'Accept'=>['*/*', 'application/json'], 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-                       'Content-Type'=>'application/json', 'User-Agent'=>['Ruby', 'VaultRuby/0.3.0 (+github.com/hashicorp/vault-ruby)'],
+                       'Content-Type'=>'application/json', 'User-Agent'=>['Ruby', 'VaultRuby/0.4.0 (+github.com/hashicorp/vault-ruby)'],
                        'X-Vault-Token'=>'GUID' }).
     to_return(:status => 200, :body => token.to_json, :headers => { 'Content-Type'=>'application/json' })
   end
@@ -43,7 +44,7 @@ class RequestTest < Test::Unit::TestCase
   ###
 
   def app
-    VaultPlugin::VaultAPI.new
+    VaultPlugin::Endpoint.new
   end
 
   def setup

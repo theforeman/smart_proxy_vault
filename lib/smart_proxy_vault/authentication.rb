@@ -25,9 +25,9 @@ module VaultPlugin
 
     # Returns the human-readable identity for the requesting client
     # Optionally used in a token's metadata & display-name
-    def client
+    def vault_client
       extend auth_module
-      client
+      vault_client
     end
   end
 end

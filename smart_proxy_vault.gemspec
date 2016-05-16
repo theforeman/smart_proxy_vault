@@ -25,5 +25,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rr', '~> 1.1')
 
   s.add_runtime_dependency('chef-api', '~> 0.5.0')
-  s.add_runtime_dependency('vault', '~> 0.3.0')
+  s.add_runtime_dependency('vault', '~> 0.4.0')
 end
