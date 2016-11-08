@@ -20,7 +20,8 @@ module VaultPlugin
 
     get '/token/issue' do
       ttl = params[:ttl]
-      issue(ttl) if valid_ttl? ttl
+      role = params[:role]
+      issue(ttl, role) if valid_ttl? ttl
     end
   end
 end

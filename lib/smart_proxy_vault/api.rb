@@ -25,6 +25,10 @@ module VaultPlugin
           @connection.auth_token.create(options).auth.client_token
         end
 
+        def issue_role_token(role, options)
+          @connection.auth_token.create_with_role(role, options).auth.client_token
+        end
+
         def lookup_self
           @connection.auth_token.lookup_self
         end
@@ -49,9 +53,10 @@ module VaultPlugin
         Client.new
       end
 
-      def issue(ttl)
+      def issue(ttl, role)
         begin
-          vault.issue_token options(ttl)
+          opts = options ttl
+          role.nil? ? vault.issue_token(opts) : vault.issue_role_token(role, opts)
         rescue StandardError => e
           log_halt 500, 'Failed to generate Vault token ' + e.message
         end
