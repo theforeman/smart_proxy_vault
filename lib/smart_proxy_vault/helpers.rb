@@ -19,7 +19,7 @@ module VaultPlugin
     def to_seconds(string)
       case string.slice(-1)
       when 'd'
-        string.tr('d', '').to_i * 30 * 24
+        string.tr('d', '').to_i * 24 * 3600
       when 'h'
         string.tr('h', '').to_i * 3600
       when 'm'
