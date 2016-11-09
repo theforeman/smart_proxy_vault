@@ -32,11 +32,24 @@ class RequestTest < Test::Unit::TestCase
 
   def stub_response
     stub_request(:post, "https://vault.example.com/v1/auth/token/create").
-    with(:body => "{\"ttl\":\"12h\"}",
-         :headers => { 'Accept'=>['*/*', 'application/json'], 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-                       'Content-Type'=>'application/json', 'User-Agent'=>['Ruby', 'VaultRuby/0.4.0 (+github.com/hashicorp/vault-ruby)'],
-                       'X-Vault-Token'=>'GUID' }).
-    to_return(:status => 200, :body => token.to_json, :headers => { 'Content-Type'=>'application/json' })
+      with(:body => "{\"ttl\":\"12h\"}",
+           :headers => { 'Accept'=>['*/*', 'application/json'],
+                         'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+                         'Content-Type'=>'application/json',
+                         'User-Agent'=>['Ruby', 'VaultRuby/0.7.3 (+github.com/hashicorp/vault-ruby)'],
+                         'X-Vault-Token'=>'GUID'}).
+      to_return(:status => 200, :body => token.to_json, :headers => { 'Content-Type'=>'application/json' })
+  end
+
+  def stub_response_role
+    stub_request(:post, "https://vault.example.com/v1/auth/token/create/foo").
+      with(:body => "{\"ttl\":\"12h\"}",
+           :headers => { 'Accept'=>['*/*', 'application/json'],
+                         'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+                         'Content-Type'=>'application/json',
+                         'User-Agent'=>['Ruby', 'VaultRuby/0.7.3 (+github.com/hashicorp/vault-ruby)'],
+                         'X-Vault-Token'=>'GUID'}).
+      to_return(:status => 200, :body => token.to_json, :headers => { 'Content-Type'=>'application/json' })
   end
 
   ###
@@ -63,6 +76,13 @@ class RequestTest < Test::Unit::TestCase
   def test_vault_token_issue
     stub_response
     get '/token/issue', ttl: '12h'
+    assert last_response.ok?
+  end
+
+  def test_vault_token_issue_role
+    stub_response_role
+    x = get '/token/issue', role: 'foo', ttl: '12h'
+    File.write '/tmp/test.html', x.body
     assert last_response.ok?
   end
 
