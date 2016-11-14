@@ -34,7 +34,7 @@ module VaultPlugin
         end
 
         def renew_self
-          @connection.auth_token.renew_self(lookup_self[:data][:creation_ttl])
+          @connection.auth_token.renew_self(lookup_self.data[:creation_ttl])
         end
       end
 
