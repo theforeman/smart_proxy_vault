@@ -9,6 +9,7 @@ require 'webmock/test_unit'
 require 'rack/test'
 require 'rr'
 require 'factory_girl'
+require 'pry'
 FactoryGirl.find_definitions
 
 require 'smart_proxy_for_testing'
