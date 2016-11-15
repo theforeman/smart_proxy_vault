@@ -1,9 +1,9 @@
-require 'test_helper'
+require_relative './test_helper'
 require 'smart_proxy_vault/authentication/chef'
-
 
 class AuthenticationChefTest < Test::Unit::TestCase
   include Rack::Test::Methods
+  include Proxy::Pluggable
 
   ###
   # Classes

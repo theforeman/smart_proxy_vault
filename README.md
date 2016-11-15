@@ -1,13 +1,13 @@
-[![Build Status](https://img.shields.io/travis/visioncritical/smart_proxy_vault/master.svg)](https://travis-ci.org/visioncritical/smart_proxy_vault)
+[![Build Status](https://img.shields.io/travis/theforeman/smart_proxy_vault/master.svg)](https://travis-ci.org/theforeman/smart_proxy_vault)
 [![Code Quality](https://img.shields.io/codeclimate/github/visioncritical/smart_proxy_vault.svg)](https://codeclimate.com/github/visioncritical/smart_proxy_vault)
 [![Code Climate](https://img.shields.io/codeclimate/coverage/github/visioncritical/smart_proxy_vault.svg)](https://codeclimate.com/github/visioncritical/smart_proxy_vault/coverage)
 [![Gem](https://img.shields.io/gem/v/smart_proxy_vault.svg)](https://rubygems.org/gems/smart_proxy_vault/versions)
 [![GitHub license](https://img.shields.io/badge/license-GPLv3-blue.svg)](./LICENSE)
 
 
-# Smart Proxy - Vault Plugin
+# Smart Proxy - Hashicorp Vault Plugin
 
-A Smart Proxy plugin will return a Vault token after authenticating a client.
+A Smart Proxy plugin that will return a Vault token after authenticating a client.
 
 ## Design
 
@@ -19,7 +19,7 @@ If you're unable to use one of the above to authenticate your clients, you can a
 
 ## Installation
 
-Add this line to your Smart Proxy bundler.d/vault.rb gemfile:
+Add this line to your Smart Proxy's `bundler.d/vault.rb` gemfile:
 
 ```ruby
 gem 'smart_proxy_vault'
@@ -58,7 +58,7 @@ Example:
 
 #####:enabled:
 
-Toggles whether or not this plugin is enabled for Smart Proxy.
+Toggles whether or not this plugin is enabled.
 
 #####:auth_backend:
 
@@ -123,7 +123,9 @@ A hash of settings that are used to configure a connection to the Chef server (u
 
 ## Usage
 
-To configure this plugin you can use template from [settings.d/vault.yml.example](settings.d/vault.yml.example). You must place the vault.yml config file in your Smart Proxy's `config/settings.d/` directory.
+To configure this plugin you can use template from [settings.d/vault.yml.example](settings.d/vault.yml.example). You must place the `vault.yml` config file in your Smart Proxy's `config/settings.d/` directory.
+
+The token specified in the [`:vault:`](#vault) section must be a role token so that this plugin can renew it indefinitely.
 
 ### Endpoints
 
@@ -131,13 +133,21 @@ To configure this plugin you can use template from [settings.d/vault.yml.example
 
 ##### Parameters
 
-`ttl=X[d,h,m,s]`
+###### `ttl=X[d,h,m,s]`
 
-Overrides the token TTL specified in the [`:token_options:`](#token_options) section. This value must be **lower** than the default TTL.
+Overrides the token TTL specified in the [`:token_options:`](#token_options) section. However, this value must be **lower** than the Vault server's `max_lease_ttl` value.
 
 Example:
 
 `/vault/token/issue?ttl=60s`
+
+###### `role=foo`
+
+A role to assign the token. Tokens issued under roles are able to be renewed indefinitely. This is useful for applications like Consul Template. The role must be created on the Vault server first.
+
+Example:
+
+`/vault/token/issue?role=foobar`
 
 ### Caveats
 

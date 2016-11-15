@@ -1,5 +1,10 @@
 # Change Log
 
+## [v0.4.0](https://github.com/theforeman/smart_proxy_vault/tree/v0.4.0)
+- Added creating tokens from roles
+- Fixed days to seconds calculation
+- Updated Vault gem dependency to 0.7.0
+
 ## [v0.3.0](https://github.com/theforeman/smart_proxy_vault/tree/v0.3.0)
 - Added token renewal (Closes [\#2](https://github.com/theforeman/smart_proxy_vault/issues/2))
 - Cleaned up lib/ directory layout & module namespaces
