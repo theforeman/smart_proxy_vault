@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative './test_helper'
 require 'smart_proxy_vault'
 require 'smart_proxy_vault/endpoint'
 

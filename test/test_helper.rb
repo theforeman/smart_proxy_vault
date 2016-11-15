@@ -1,13 +1,13 @@
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+require 'simplecov'
+SimpleCov.start
 
 $: << File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'openssl'
 require 'test/unit'
+require "test/unit/rr"
 require 'webmock/test_unit'
 require 'rack/test'
-require 'rr'
 require 'factory_girl'
 require 'pry'
 FactoryGirl.find_definitions
