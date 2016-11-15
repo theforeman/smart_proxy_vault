@@ -16,6 +16,14 @@ module VaultPlugin
       ::VaultPlugin::Plugin.settings.add_token_metadata
     end
 
+    def vault_configure
+      Vault.configure do |config|
+        vault_settings.each do |k, v|
+          config.send("#{k}=", v)
+        end
+      end
+    end
+
     def to_seconds(string)
       case string.slice(-1)
       when 'd'

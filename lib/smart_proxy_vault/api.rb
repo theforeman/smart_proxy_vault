@@ -13,28 +13,22 @@ module VaultPlugin
       include ::VaultPlugin::Helpers
 
       class Client
-        attr_reader :connection
+        extend ::VaultPlugin::Helpers
 
-        include ::VaultPlugin::Helpers
-
-        def initialize
-          @connection = ::Vault::Client.new(vault_settings)
+        def self.issue_token(options)
+          Vault.auth_token.create(options).auth.client_token
         end
 
-        def issue_token(options)
-          @connection.auth_token.create(options).auth.client_token
+        def self.issue_role_token(role, options)
+          Vault.auth_token.create_with_role(role, options).auth.client_token
         end
 
-        def issue_role_token(role, options)
-          @connection.auth_token.create_with_role(role, options).auth.client_token
+        def self.lookup_self
+          Vault.auth_token.lookup_self
         end
 
-        def lookup_self
-          @connection.auth_token.lookup_self
-        end
-
-        def renew_self
-          @connection.auth_token.renew_self(lookup_self.data[:creation_ttl])
+        def self.renew_self
+          Vault.auth_token.renew_self(lookup_self.data[:creation_ttl])
         end
       end
 
@@ -49,26 +43,22 @@ module VaultPlugin
         options.merge(ttl: ttl) unless ttl.nil?
       end
 
-      def vault
-        Client.new
-      end
-
       def issue(ttl, role)
         begin
           opts = options ttl
-          role.nil? ? vault.issue_token(opts) : vault.issue_role_token(role, opts)
+          role.nil? ? Client.issue_token(opts) : Client.issue_role_token(role, opts)
         rescue StandardError => e
           log_halt 500, 'Failed to generate Vault token ' + e.message
         end
       end
 
       def creation_ttl
-        vault.lookup_self[:data][:creation_ttl]
+        Client.lookup_self[:data][:creation_ttl]
       end
 
       def renew
         begin
-          vault.renew_self
+          Client.renew_self
         rescue StandardError => e
           puts 'Failed to renew Vault token ' + e.message
         end

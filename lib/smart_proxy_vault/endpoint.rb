@@ -16,6 +16,7 @@ module VaultPlugin
       authorized?
     end
 
+    vault_configure
     start_renewal
 
     get '/token/issue' do
