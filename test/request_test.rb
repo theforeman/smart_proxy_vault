@@ -1,9 +1,11 @@
 require_relative './test_helper'
 require 'smart_proxy_vault'
+require_relative './helpers/helpers'
 require 'smart_proxy_vault/endpoint'
 
 class RequestTest < Test::Unit::TestCase
   include Rack::Test::Methods
+  include RequestHelpers
   include VaultPlugin::API
 
   ###
@@ -122,14 +124,7 @@ class RequestTest < Test::Unit::TestCase
   def setup
     stub_authorized?(true)
     stub_client
-    stub.proxy(::VaultPlugin::Plugin.settings).token_options {{
-      ttl: '12h'
-    }}
-    stub.proxy(::VaultPlugin::Plugin.settings).vault {{
-      address: 'https://vault.example.com',
-      token: 'GUID',
-      ssl_verify: true
-    }}
+    configure_settings
   end
 
   def test_vault_token_issue
@@ -153,5 +148,10 @@ class RequestTest < Test::Unit::TestCase
     stub_response_lookup
     stub_response_renew
     renew
+  end
+
+  def test_vault_settings
+    failure_msg = 'Unexpected Vault Configuration'
+    assert_equal [], vault_settings.values - Vault.options.values.compact, failure_msg
   end
 end
