@@ -16,7 +16,7 @@ module VaultPlugin
       ::VaultPlugin::Plugin.settings.add_token_metadata
     end
 
-    def vault_configure
+    def vault_client_configure
       Vault.configure do |config|
         vault_settings.each do |k, v|
           config.send("#{k}=", v)
