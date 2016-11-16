@@ -1,5 +1,8 @@
 # Change Log
 
+## [v0.4.1](https://github.com/theforeman/smart_proxy_vault/tree/v0.4.1)
+- Fix for https://github.com/hashicorp/vault-ruby/issues/121
+
 ## [v0.4.0](https://github.com/theforeman/smart_proxy_vault/tree/v0.4.0)
 - Added creating tokens from roles
 - Fixed days to seconds calculation
