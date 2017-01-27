@@ -46,7 +46,7 @@ module VaultPlugin
       def issue(ttl, role)
         begin
           opts = options ttl
-          role.nil? ? Client.issue_token(opts) : Client.issue_role_token(role, opts)
+          role.nil? ? Client.issue_token(opts) : Client.issue_role_token(role, metadata)
         rescue StandardError => e
           log_halt 500, 'Failed to generate Vault token ' + e.message
         end
