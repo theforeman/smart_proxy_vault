@@ -95,7 +95,7 @@ If set to true, this plugin will add the requesting client's ID (as determined b
 
 #####:token_options:
 
-A hash of parameters that will be passed to the token creation call ([/auth/token/create](https://www.vaultproject.io/docs/auth/token.html)).
+A hash of parameters that will be passed to the token creation call except when requesting a role token ([/auth/token/create](https://www.vaultproject.io/docs/auth/token.html)).
 
 #### Chef Backend
 

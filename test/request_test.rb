@@ -24,6 +24,12 @@ class RequestTest < Test::Unit::TestCase
     end
   end
 
+  def stub_add_token_metadata
+    any_instance_of(VaultPlugin::Endpoint) do |klass|
+      stub(klass).add_token_metadata? { false }
+    end
+  end
+
   def token
     {lease_id: "",
      renewable: false,
@@ -81,8 +87,7 @@ class RequestTest < Test::Unit::TestCase
 
   def stub_response_role
     stub_request(:post, "https://vault.example.com/v1/auth/token/create/foo").
-      with(:body => "{\"ttl\":\"12h\"}",
-           :headers => { 'Accept'=>['*/*', 'application/json'],
+      with(:headers => { 'Accept'=>['*/*', 'application/json'],
                          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
                          'Content-Type'=>'application/json',
                          'User-Agent'=>['Ruby', 'VaultRuby/0.7.3 (+github.com/hashicorp/vault-ruby)'],
@@ -134,8 +139,9 @@ class RequestTest < Test::Unit::TestCase
   end
 
   def test_vault_token_issue_role
+    stub_add_token_metadata
     stub_response_role
-    get '/token/issue', role: 'foo', ttl: '12h'
+    get '/token/issue', role: 'foo'
     assert last_response.ok?
   end
 

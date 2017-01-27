@@ -1,5 +1,8 @@
 # Change Log
 
+## [v0.4.2](https://github.com/theforeman/smart_proxy_vault/tree/v0.4.1)
+- Fixed issue with requesting a role token that didn't contain the default policy
+
 ## [v0.4.1](https://github.com/theforeman/smart_proxy_vault/tree/v0.4.1)
 - Fix for https://github.com/hashicorp/vault-ruby/issues/121
 
