@@ -56,15 +56,15 @@ Example:
 
 #### General
 
-#####:enabled:
+##### :enabled:
 
 Toggles whether or not this plugin is enabled.
 
-#####:auth_backend:
+##### :auth_backend:
 
 Specifies what authentication module you would like to use to authenticate your clients (must correspond to a filename in [lib/smart_proxy_vault/authentication/](lib/smart_proxy_vault/authentication/))
 
-#####:vault:
+##### :vault:
 
 A hash of Vault settings that are used to configure a connection to the Vault server (determined by the [Vault](https://github.com/hashicorp/vault-ruby) gem).
 
@@ -89,11 +89,11 @@ A hash of Vault settings that are used to configure a connection to the Vault se
   :timeout:
 ```
 
-#####:add_token_metadata:
+##### :add_token_metadata:
 
 If set to true, this plugin will add the requesting client's ID (as determined by the auth_backend) in the metadata & display-name fields when requesting a token.
 
-#####:token_options:
+##### :token_options:
 
 A hash of parameters that will be passed to the token creation call except when requesting a role token ([/auth/token/create](https://www.vaultproject.io/docs/auth/token.html)).
 
@@ -101,7 +101,7 @@ A hash of parameters that will be passed to the token creation call except when 
 
 Only to be specified when the `:auth_backend:` is `chef`. Refer to the [Chef backend](documentation/CHEF.md) documentation for more information.
 
-#####:chef:
+##### :chef:
 
 A hash of settings that are used to configure a connection to the Chef server (used by the [Chef API](https://github.com/sethvargo/chef-api) gem).
 
