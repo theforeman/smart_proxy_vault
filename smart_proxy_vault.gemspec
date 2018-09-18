@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ['README.md', 'LICENSE', 'CHANGELOG.md']
   s.files = Dir['{lib,settings.d,bundler.d,test}/**/*'] + s.extra_rdoc_files
   s.test_files = s.files.grep(%r{^(test)/})
-  s.homepage = 'http://github.com/theforeman/smart_proxy_vault'
-  s.license = 'GPLv3'
+  s.homepage = 'https://github.com/theforeman/smart_proxy_vault'
+  s.license = 'GPL-3.0'
 
   s.add_development_dependency('bundler', '~> 1.11')
   s.add_development_dependency('rake', '~> 10')
